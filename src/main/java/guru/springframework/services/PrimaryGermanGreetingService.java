@@ -12,9 +12,17 @@ import org.springframework.stereotype.Service;
 @Profile("de")
 public class PrimaryGermanGreetingService implements GreetingService {
 
-    private GreetingRepository greetingRepository;
+    // @Autowired == BAD way to handle this
+	private GreetingRepository greetingRepository;
 
-    @Override
+	/* correct way to handle injection of the GreetingRepository */
+    public PrimaryGermanGreetingService(GreetingRepository greetingRepository) {
+		super();
+		this.greetingRepository = greetingRepository;
+	}
+
+
+	@Override
     public String sayGreeting() {
         return greetingRepository.getGermanGreeting();
     }

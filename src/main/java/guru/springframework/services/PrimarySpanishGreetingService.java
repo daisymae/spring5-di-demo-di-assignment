@@ -12,9 +12,23 @@ import org.springframework.stereotype.Service;
 @Primary
 public class PrimarySpanishGreetingService implements GreetingService {
 
+	/* 
+	 * bad Cheryl!
+	 * While just adding autowired to the property will work, it is
+	 * bad coding style.
+	 * Instead, create a constructor and let Spring autowire and inject it there. 
+	 */
+//	@Autowired -- BAD
     private GreetingRepository greetingRepository;
 
-    @Override
+    
+    public PrimarySpanishGreetingService(GreetingRepository greetingRepository) {
+		super();
+		this.greetingRepository = greetingRepository;
+	}
+
+
+	@Override
     public String sayGreeting() {
         return greetingRepository.getSpanishGreeting();
     }
